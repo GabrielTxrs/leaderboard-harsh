@@ -19,8 +19,8 @@ public class UsuarioController {
         return usuarioService.getUsuarios();
     }
 
-    @PostMapping
-    public void addUsuario() {
-
-    }
+//    @PostMapping
+//    public void addUsuario() {
+//
+//    }
 }

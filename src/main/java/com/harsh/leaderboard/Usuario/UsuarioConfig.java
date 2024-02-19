@@ -12,19 +12,19 @@ import java.util.List;
 public class UsuarioConfig {
     @Bean
     CommandLineRunner commandLineRunner(UsuarioRepository repository) {
-       return args -> {
-           UsuarioDto mofuzinho = new UsuarioDto(
-              123456,
-              "Mofuzinho",
-              LocalDate.of(2000, Month.JANUARY,5)
+        return args -> {
+            UsuarioDto mofuzinho = new UsuarioDto(
+                    123456,
+                    "Mofuzinho",
+                    LocalDate.of(2000, Month.JANUARY,5)
             );
 
-           UsuarioDto mofu = new UsuarioDto(
-                   12345678,
-                   "Mofu",
-                   LocalDate.of(2000, Month.FEBRUARY,5)
-           );
-           repository.saveAll(List.of(mofu, mofuzinho));
-       };
+            UsuarioDto mofu = new UsuarioDto(
+                    12345678,
+                    "Mofu",
+                    LocalDate.of(2000, Month.FEBRUARY,5)
+            );
+            repository.saveAll(List.of(mofu, mofuzinho));
+        };
     }
 }
