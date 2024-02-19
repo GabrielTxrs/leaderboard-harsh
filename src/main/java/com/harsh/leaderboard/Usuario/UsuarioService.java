@@ -18,5 +18,12 @@ public class UsuarioService {
     public List<UsuarioDto> getUsuarios() {
         return usuarioRepository.findAll();
     }
+    public void addUsuario(UsuarioDto usuario) {
+        System.out.println(usuario);
+        System.out.println(usuario.getNome());
+        System.out.println(usuario.getCpf());
+        System.out.println(usuario.getId());
+        System.out.println(usuario.getDataNascimento());
+    }
 
 }
