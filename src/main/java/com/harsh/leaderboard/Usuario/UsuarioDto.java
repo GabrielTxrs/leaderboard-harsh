@@ -1,16 +1,22 @@
 package com.harsh.leaderboard.Usuario;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
-
+@Entity(name = "TB_USUARIO")
 public class UsuarioDto {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_USUARIO")
+    private Long id;
+    @Column(name = "PRIMEIRO_NOME")
     private String primeiroNome;
     private String sobrenome;
+    @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
     private int idade;
     private String telefone;
@@ -20,8 +26,8 @@ public class UsuarioDto {
     public UsuarioDto() {
     }
 
-    public UsuarioDto(int id, String primeiroNome, String sobrenome, LocalDate dataNascimento, int idade, String telefone,
-                       String senha) {
+    public UsuarioDto(Long id, String primeiroNome, String sobrenome, LocalDate dataNascimento, int idade, String telefone,
+                      String senha) {
         this.id = id;
         this.primeiroNome = primeiroNome;
         this.sobrenome = sobrenome;
@@ -30,4 +36,5 @@ public class UsuarioDto {
         this.telefone = telefone;
         this.senha = senha;
     }
+
 }

@@ -31,7 +31,7 @@ public class JdbcManual {
         ResultSet rs = statement.executeQuery(sql);
         List<UsuarioDto> usuarios = new ArrayList<>();
         while (rs.next()) {
-            int id = rs.getInt("ID_USUARIO");
+            Long id = (long) rs.getInt("ID_USUARIO");
             String primeiroNome = rs.getString("PRIMEIRO_NOME");
             String sobrenome = rs.getString("SOBRENOME");
             String telefone = rs.getString("TELEFONE");
@@ -46,7 +46,7 @@ public class JdbcManual {
 
     public String insert(UsuarioDto usuario) throws SQLException {
         Statement statement = connection.createStatement();
-        int id = usuario.getId();
+        Long id = usuario.getId();
         String primeiroNome = usuario.getPrimeiroNome();
         String sobrenome = usuario.getSobrenome();
         String telefone = usuario.getTelefone();
