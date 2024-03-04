@@ -1,47 +1,35 @@
 package com.harsh.leaderboard.Usuario;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Month;
+import java.util.List;
 
 @RestController
 @RequestMapping
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-    @Autowired
-    private JdbcManual jdbcManual;
-
-
-    @GetMapping
-    public void getUsuario() {
-        try {
-            jdbcManual.setConnection();
-            System.out.println("Conexao feita");
-            jdbcManual.select();
-
-            jdbcManual.insert(new UsuarioDto(5l,"55555", "abcd", LocalDate.of(2000, Month.MARCH,12)));
-
-            jdbcManual.select();
-
-            jdbcManual.fecharConexao();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
-//    @GetMapping
-//    public List<UsuarioDto> getUsuario() {
-//        return usuarioService.getUsuarios();
-//    }
+    @GetMapping("getUsuarioBancoLocal")
+    public ResponseEntity<List<UsuarioDto>> getUsuarioBancoLocal() {
+        return ResponseEntity.ok(usuarioService.getUsuarioBancoLocal());
+    }
+    @GetMapping("getUsuarioLeaderboard")
+    public ResponseEntity<List<UsuarioDto>> getUsuarioLeaderboard() {
+        return ResponseEntity.ok(usuarioService.getUsuarioLeaderboard());
+    }
+    @PostMapping("inserirUsuarioBancoLocal")
+    public ResponseEntity<String> inserirUsuarioBancoLocal(@RequestBody UsuarioDto usuario) {
+        return ResponseEntity.ok(usuarioService.inserirUsuarioBancoLocal(usuario));
+    }
+    @PostMapping("inserirUsuarioLeaderboard")
+    public ResponseEntity<String> inserirUsuarioLeaderboard(@RequestBody UsuarioDto usuario) {
+        return ResponseEntity.ok(usuarioService.inserirUsuarioLeaderboard(usuario));
+    }
 
-//    @PostMapping
-//    public void addUsuario(@RequestBody UsuarioDto usuario) {
-//        usuarioService.addUsuario(usuario);
-//    }
 }
