@@ -26,7 +26,6 @@ public class UsuarioService {
         }
         return null;
     }
-
     public List<UsuarioDto> getUsuarioLeaderboard() {
         try {
             jdbcManual.setConnection("professor.cywhulnakf35.us-east-1.rds.amazonaws.com",
