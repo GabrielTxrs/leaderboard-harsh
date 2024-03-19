@@ -1,5 +1,6 @@
-package com.harsh.leaderboard.Usuario;
+package com.harsh.leaderboard;
 
+import com.harsh.leaderboard.usuario.UsuarioDto;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;

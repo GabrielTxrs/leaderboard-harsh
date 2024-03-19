@@ -1,16 +1,17 @@
-package com.harsh.leaderboard.Usuario;
+package com.harsh.leaderboard.usuario;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @Entity(name = "TB_USUARIO")
 public class UsuarioDto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_USUARIO")
     private Long id;
     @Column(name = "PRIMEIRO_NOME")

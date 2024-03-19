@@ -1,9 +1,10 @@
-package com.harsh.leaderboard.Usuario;
+package com.harsh.leaderboard.usuario;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -18,10 +19,37 @@ public class UsuarioController {
         this.repository = repository;
     }
 
-    @GetMapping("getUsuarioComRepository")
-    public ResponseEntity<List<UsuarioDto>> getUsuarioComRepository() {
+    @PostMapping("adicionar-usuario")
+    public ResponseEntity<UsuarioDto> adicionarUsuario(@RequestBody UsuarioDto usuario) {
+        return ResponseEntity.ok(repository.save(usuario));
+    }
+
+    @GetMapping("get-usuarios")
+    public ResponseEntity<List<UsuarioDto>> getUsuarios() {
         return ResponseEntity.ok(repository.findAll());
     }
+
+    @GetMapping("get-usuario/{id}")
+    public ResponseEntity<Optional<UsuarioDto>> getUsuarioPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(repository.findById(id));
+    }
+
+    @PutMapping("alterar-usuario/{id}")
+    public ResponseEntity<UsuarioDto> alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioDto dadosUsuario) {
+        UsuarioDto usuarioAtualizado = repository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: " + id));
+
+        usuarioAtualizado.setIdade(dadosUsuario.getIdade());
+        usuarioAtualizado.setSenha(dadosUsuario.getSenha());
+        usuarioAtualizado.setPrimeiroNome(dadosUsuario.getPrimeiroNome());
+        usuarioAtualizado.setSobrenome(dadosUsuario.getSobrenome());
+        usuarioAtualizado.setTelefone(dadosUsuario.getTelefone());
+        usuarioAtualizado.setDataNascimento(dadosUsuario.getDataNascimento());
+
+        repository.save(usuarioAtualizado);
+        return ResponseEntity.ok(usuarioAtualizado);
+    }
+
+
     @GetMapping("getUsuarioBancoLocal")
     public ResponseEntity<List<UsuarioDto>> getUsuarioBancoLocal() {
         return ResponseEntity.ok(usuarioService.getUsuarioBancoLocal());

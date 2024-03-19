@@ -1,5 +1,6 @@
-package com.harsh.leaderboard.Usuario;
+package com.harsh.leaderboard.usuario;
 
+import com.harsh.leaderboard.JdbcManual;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
