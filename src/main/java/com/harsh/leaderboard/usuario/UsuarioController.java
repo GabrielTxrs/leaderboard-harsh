@@ -12,41 +12,37 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    private final UsuarioRepository repository;
-
-    public UsuarioController(UsuarioService usuarioService, UsuarioRepository repository) {
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.repository = repository;
     }
 
     @PostMapping("adicionar-usuario")
     public ResponseEntity<UsuarioDto> adicionarUsuario(@RequestBody UsuarioDto usuario) {
-        return ResponseEntity.ok(repository.save(usuario));
+        return ResponseEntity.ok(usuarioService.adicionarUsuario(usuario));
     }
 
     @GetMapping("get-usuarios")
     public ResponseEntity<List<UsuarioDto>> getUsuarios() {
-        return ResponseEntity.ok(repository.findAll());
+        return ResponseEntity.ok(usuarioService.getUsuarios());
     }
 
     @GetMapping("get-usuario/{id}")
     public ResponseEntity<Optional<UsuarioDto>> getUsuarioPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(repository.findById(id));
+        return ResponseEntity.ok(usuarioService.getUsuarioPorId(id));
     }
 
     @PutMapping("alterar-usuario/{id}")
     public ResponseEntity<UsuarioDto> alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioDto dadosUsuario) {
-        UsuarioDto usuarioAtualizado = repository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: " + id));
+       return ResponseEntity.ok(usuarioService.alterarUsuarioPorId(id, dadosUsuario));
+    }
+    @DeleteMapping("remover-usuario/{id}")
+    public ResponseEntity<String> removerUsuarioPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.removerUsuarioPorId(id));
+    }
+    @DeleteMapping("remover-usuario")
+    public ResponseEntity<String>removerUsuarioPorId(@RequestBody UsuarioDto usuario) {
+        return ResponseEntity.ok(usuarioService.removerUsuarioPorId(usuario));
 
-        usuarioAtualizado.setIdade(dadosUsuario.getIdade());
-        usuarioAtualizado.setSenha(dadosUsuario.getSenha());
-        usuarioAtualizado.setPrimeiroNome(dadosUsuario.getPrimeiroNome());
-        usuarioAtualizado.setSobrenome(dadosUsuario.getSobrenome());
-        usuarioAtualizado.setTelefone(dadosUsuario.getTelefone());
-        usuarioAtualizado.setDataNascimento(dadosUsuario.getDataNascimento());
-
-        repository.save(usuarioAtualizado);
-        return ResponseEntity.ok(usuarioAtualizado);
     }
 
 
