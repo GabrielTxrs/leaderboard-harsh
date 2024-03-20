@@ -56,7 +56,7 @@ public class UsuarioService {
     }
 
     @DeleteMapping("remover-usuario")
-    public String removerUsuarioPorId(UsuarioDto usuario) {
+    public String removerUsuario(UsuarioDto usuario) {
         usuarioRepository.delete(usuario);
         return "Usuario removido com sucesso";
     }

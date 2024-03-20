@@ -40,8 +40,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.removerUsuarioPorId(id));
     }
     @DeleteMapping("remover-usuario")
-    public ResponseEntity<String>removerUsuarioPorId(@RequestBody UsuarioDto usuario) {
-        return ResponseEntity.ok(usuarioService.removerUsuarioPorId(usuario));
+    public ResponseEntity<String>removerUsuario(@RequestBody UsuarioDto usuario) {
+        return ResponseEntity.ok(usuarioService.removerUsuario(usuario));
 
     }
 
