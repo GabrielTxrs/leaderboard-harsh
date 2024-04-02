@@ -2,7 +2,6 @@ package com.harsh.leaderboard.usuario;
 
 import com.harsh.leaderboard.JdbcManual;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,22 +18,18 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @PostMapping("adicionar-usuario")
     public UsuarioDto adicionarUsuario(UsuarioDto usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    @GetMapping("get-usuarios")
     public List<UsuarioDto> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    @GetMapping("get-usuario/{id}")
     public Optional<UsuarioDto> getUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
-    @PutMapping("alterar-usuario/{id}")
     public UsuarioDto alterarUsuarioPorId(Long id, UsuarioDto dadosUsuario) {
         UsuarioDto usuarioAtualizado = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: "+id));
 
@@ -49,13 +44,11 @@ public class UsuarioService {
         return usuarioAtualizado;
     }
 
-    @DeleteMapping("remover-usuario/{id}")
     public String removerUsuarioPorId(Long id) {
         usuarioRepository.deleteById(id);
         return "Usuario removido com sucesso";
     }
 
-    @DeleteMapping("remover-usuario")
     public String removerUsuario(UsuarioDto usuario) {
         usuarioRepository.delete(usuario);
         return "Usuario removido com sucesso";

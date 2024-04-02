@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("usuario")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -16,31 +16,31 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("adicionar-usuario")
+    @PostMapping("adicionar")
     public ResponseEntity<UsuarioDto> adicionarUsuario(@RequestBody UsuarioDto usuario) {
         return ResponseEntity.ok(usuarioService.adicionarUsuario(usuario));
     }
 
-    @GetMapping("get-usuarios")
+    @GetMapping("getAll")
     public ResponseEntity<List<UsuarioDto>> getUsuarios() {
         return ResponseEntity.ok(usuarioService.getUsuarios());
     }
 
-    @GetMapping("get-usuario/{id}")
+    @GetMapping("get/{id}")
     public ResponseEntity<Optional<UsuarioDto>> getUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.getUsuarioPorId(id));
     }
 
-    @PutMapping("alterar-usuario/{id}")
+    @PutMapping("alterar/{id}")
     public ResponseEntity<UsuarioDto> alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioDto dadosUsuario) {
        return ResponseEntity.ok(usuarioService.alterarUsuarioPorId(id, dadosUsuario));
     }
-    @DeleteMapping("remover-usuario/{id}")
+    @DeleteMapping("remover/{id}")
     public ResponseEntity<String> removerUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.removerUsuarioPorId(id));
     }
-    @DeleteMapping("remover-usuario")
-    public ResponseEntity<String>removerUsuario(@RequestBody UsuarioDto usuario) {
+    @DeleteMapping("remover")
+    public ResponseEntity<String> removerUsuario(@RequestBody UsuarioDto usuario) {
         return ResponseEntity.ok(usuarioService.removerUsuario(usuario));
 
     }

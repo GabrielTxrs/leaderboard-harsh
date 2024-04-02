@@ -32,14 +32,14 @@ public class JdbcManual {
         ResultSet rs = statement.executeQuery(sql);
         List<UsuarioDto> usuarios = new ArrayList<>();
         while (rs.next()) {
-            Long id = (long) rs.getInt("ID_USUARIO");
+            Long idUsuario = (long) rs.getInt("ID_USUARIO");
             String primeiroNome = rs.getString("PRIMEIRO_NOME");
             String sobrenome = rs.getString("SOBRENOME");
             String telefone = rs.getString("TELEFONE");
             int idade = rs.getInt("IDADE");
             String senha = rs.getString("SENHA");
             LocalDate localDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(rs.getDate("DATA_NASCIMENTO")));
-            usuarios.add(new UsuarioDto(id, primeiroNome, sobrenome, localDate, idade, telefone, senha));
+            usuarios.add(new UsuarioDto(idUsuario, primeiroNome, sobrenome, localDate, idade, telefone, senha));
         }
         statement.close();
         return usuarios;
@@ -47,13 +47,13 @@ public class JdbcManual {
 
     public String insert(UsuarioDto usuario) throws SQLException {
         Statement statement = connection.createStatement();
-        Long id = usuario.getId();
+        Long idUsuario = usuario.getIdUsuario();
         String primeiroNome = usuario.getPrimeiroNome();
         String sobrenome = usuario.getSobrenome();
         String telefone = usuario.getTelefone();
         String senha = usuario.getSenha();
         LocalDate data = usuario.getDataNascimento();
-        String sql = "INSERT INTO TB_USUARIO (ID_USUARIO, PRIMEIRO_NOME, SOBRENOME, DATA_NASCIMENTO, IDADE, TELEFONE, SENHA) VALUES (" + id + ",'" + primeiroNome + "','" + sobrenome + "',DATE('" + data + "')," + "TIMESTAMPDIFF(YEAR,'" + data + "',CURDATE()),'" + telefone + "','" + senha + "');";
+        String sql = "INSERT INTO TB_USUARIO (ID_USUARIO, PRIMEIRO_NOME, SOBRENOME, DATA_NASCIMENTO, IDADE, TELEFONE, SENHA) VALUES (" + idUsuario + ",'" + primeiroNome + "','" + sobrenome + "',DATE('" + data + "')," + "TIMESTAMPDIFF(YEAR,'" + data + "',CURDATE()),'" + telefone + "','" + senha + "');";
         System.out.println(sql);
         statement.execute(sql);
         statement.close();
