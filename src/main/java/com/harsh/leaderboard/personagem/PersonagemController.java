@@ -16,22 +16,22 @@ public class PersonagemController {
     }
 
     @PostMapping("adicionar")
-    public ResponseEntity<PersonagemDto> adicionarPersonagem(@RequestBody PersonagemDto personagem) {
+    public ResponseEntity<Personagem> adicionarPersonagem(@RequestBody Personagem personagem) {
         return ResponseEntity.ok(personagemService.adicionarPersonagem(personagem));
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<PersonagemDto>> getPersonagems() {
+    public ResponseEntity<List<Personagem>> getPersonagems() {
         return ResponseEntity.ok(personagemService.getPersonagems());
     }
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Optional<PersonagemDto>> getPersonagemPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Personagem>> getPersonagemPorId(@PathVariable Long id) {
         return ResponseEntity.ok(personagemService.getPersonagemPorId(id));
     }
 
     @PutMapping("alterar/{id}")
-    public ResponseEntity<PersonagemDto> alterarPersonagemPorId(@PathVariable Long id, @RequestBody PersonagemDto dadosPersonagem) {
+    public ResponseEntity<Personagem> alterarPersonagemPorId(@PathVariable Long id, @RequestBody Personagem dadosPersonagem) {
         return ResponseEntity.ok(personagemService.alterarPersonagemPorId(id, dadosPersonagem));
     }
     @DeleteMapping("remover/{id}")
@@ -39,7 +39,7 @@ public class PersonagemController {
         return ResponseEntity.ok(personagemService.removerPersonagemPorId(id));
     }
     @DeleteMapping("remover")
-    public ResponseEntity<String>removerPersonagem(@RequestBody PersonagemDto personagem) {
+    public ResponseEntity<String>removerPersonagem(@RequestBody Personagem personagem) {
         return ResponseEntity.ok(personagemService.removerPersonagem(personagem));
 
     }

@@ -1,6 +1,6 @@
 package com.harsh.leaderboard;
 
-import com.harsh.leaderboard.usuario.UsuarioDto;
+import com.harsh.leaderboard.usuario.Usuario;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
@@ -26,11 +26,11 @@ public class JdbcManual {
         connection = DriverManager.getConnection(url, user, senha);
     }
 
-    public List<UsuarioDto> select() throws SQLException {
+    public List<Usuario> select() throws SQLException {
         Statement statement = connection.createStatement();
         String sql = "SELECT * FROM TB_USUARIO";
         ResultSet rs = statement.executeQuery(sql);
-        List<UsuarioDto> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
         while (rs.next()) {
             Long idUsuario = (long) rs.getInt("ID_USUARIO");
             String primeiroNome = rs.getString("PRIMEIRO_NOME");
@@ -39,13 +39,13 @@ public class JdbcManual {
             int idade = rs.getInt("IDADE");
             String senha = rs.getString("SENHA");
             LocalDate localDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(rs.getDate("DATA_NASCIMENTO")));
-            usuarios.add(new UsuarioDto(idUsuario, primeiroNome, sobrenome, localDate, idade, telefone, senha));
+            usuarios.add(new Usuario(idUsuario, primeiroNome, sobrenome, localDate, idade, telefone, senha));
         }
         statement.close();
         return usuarios;
     }
 
-    public String insert(UsuarioDto usuario) throws SQLException {
+    public String insert(Usuario usuario) throws SQLException {
         Statement statement = connection.createStatement();
         Long idUsuario = usuario.getIdUsuario();
         String primeiroNome = usuario.getPrimeiroNome();

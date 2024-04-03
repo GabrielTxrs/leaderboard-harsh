@@ -17,22 +17,22 @@ public class UsuarioController {
     }
 
     @PostMapping("adicionar")
-    public ResponseEntity<UsuarioDto> adicionarUsuario(@RequestBody UsuarioDto usuario) {
+    public ResponseEntity<Usuario> adicionarUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.adicionarUsuario(usuario));
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<UsuarioDto>> getUsuarios() {
+    public ResponseEntity<List<Usuario>> getUsuarios() {
         return ResponseEntity.ok(usuarioService.getUsuarios());
     }
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Optional<UsuarioDto>> getUsuarioPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Usuario>> getUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.getUsuarioPorId(id));
     }
 
     @PutMapping("alterar/{id}")
-    public ResponseEntity<UsuarioDto> alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioDto dadosUsuario) {
+    public ResponseEntity<Usuario> alterarUsuarioPorId(@PathVariable Long id, @RequestBody Usuario dadosUsuario) {
        return ResponseEntity.ok(usuarioService.alterarUsuarioPorId(id, dadosUsuario));
     }
     @DeleteMapping("remover/{id}")
@@ -40,29 +40,29 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.removerUsuarioPorId(id));
     }
     @DeleteMapping("remover")
-    public ResponseEntity<String> removerUsuario(@RequestBody UsuarioDto usuario) {
+    public ResponseEntity<String> removerUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.removerUsuario(usuario));
 
     }
 
 
     @GetMapping("getUsuarioBancoLocal")
-    public ResponseEntity<List<UsuarioDto>> getUsuarioBancoLocal() {
+    public ResponseEntity<List<Usuario>> getUsuarioBancoLocal() {
         return ResponseEntity.ok(usuarioService.getUsuarioBancoLocal());
     }
 
     @GetMapping("getUsuarioLeaderboard")
-    public ResponseEntity<List<UsuarioDto>> getUsuarioLeaderboard() {
+    public ResponseEntity<List<Usuario>> getUsuarioLeaderboard() {
         return ResponseEntity.ok(usuarioService.getUsuarioLeaderboard());
     }
 
     @PostMapping("inserirUsuarioBancoLocal")
-    public ResponseEntity<String> inserirUsuarioBancoLocal(@RequestBody UsuarioDto usuario) {
+    public ResponseEntity<String> inserirUsuarioBancoLocal(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.inserirUsuarioBancoLocal(usuario));
     }
 
     @PostMapping("inserirUsuarioLeaderboard")
-    public ResponseEntity<String> inserirUsuarioLeaderboard(@RequestBody UsuarioDto usuario) {
+    public ResponseEntity<String> inserirUsuarioLeaderboard(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuarioService.inserirUsuarioLeaderboard(usuario));
     }
 

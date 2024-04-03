@@ -18,20 +18,20 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public UsuarioDto adicionarUsuario(UsuarioDto usuario) {
+    public Usuario adicionarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    public List<UsuarioDto> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    public Optional<UsuarioDto> getUsuarioPorId(Long id) {
+    public Optional<Usuario> getUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
-    public UsuarioDto alterarUsuarioPorId(Long id, UsuarioDto dadosUsuario) {
-        UsuarioDto usuarioAtualizado = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: "+id));
+    public Usuario alterarUsuarioPorId(Long id, Usuario dadosUsuario) {
+        Usuario usuarioAtualizado = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: "+id));
 
         usuarioAtualizado.setIdade(dadosUsuario.getIdade());
         usuarioAtualizado.setSenha(dadosUsuario.getSenha());
@@ -49,17 +49,17 @@ public class UsuarioService {
         return "Usuario removido com sucesso";
     }
 
-    public String removerUsuario(UsuarioDto usuario) {
+    public String removerUsuario(Usuario usuario) {
         usuarioRepository.delete(usuario);
         return "Usuario removido com sucesso";
     }
 
 
-    public List<UsuarioDto> getUsuarioBancoLocal() {
+    public List<Usuario> getUsuarioBancoLocal() {
         try {
             jdbcManual.setConnection("localhost:3306", "usuario", "root", "211221");
             System.out.println("Conexao feita");
-            List<UsuarioDto> usuarios = jdbcManual.select();
+            List<Usuario> usuarios = jdbcManual.select();
             jdbcManual.fecharConexao();
             return usuarios;
         } catch (SQLException e) {
@@ -68,12 +68,12 @@ public class UsuarioService {
         return null;
     }
 
-    public List<UsuarioDto> getUsuarioLeaderboard() {
+    public List<Usuario> getUsuarioLeaderboard() {
         try {
             jdbcManual.setConnection("professor.cywhulnakf35.us-east-1.rds.amazonaws.com",
                     "professor", "professor", "professor");
             System.out.println("Conexao feita");
-            List<UsuarioDto> usuarios = jdbcManual.select();
+            List<Usuario> usuarios = jdbcManual.select();
             jdbcManual.fecharConexao();
             return usuarios;
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class UsuarioService {
         return null;
     }
 
-    public String inserirUsuarioBancoLocal(UsuarioDto usuario) {
+    public String inserirUsuarioBancoLocal(Usuario usuario) {
         try {
             jdbcManual.setConnection("localhost:3306", "usuario", "root", "211221");
             String sucesso = jdbcManual.insert(usuario);
@@ -94,7 +94,7 @@ public class UsuarioService {
         return "Não foi possivel inserir o usuario";
     }
 
-    public String inserirUsuarioLeaderboard(UsuarioDto usuario) {
+    public String inserirUsuarioLeaderboard(Usuario usuario) {
         try {
             jdbcManual.setConnection("professor.cywhulnakf35.us-east-1.rds.amazonaws.com",
                     "professor", "professor", "professor");

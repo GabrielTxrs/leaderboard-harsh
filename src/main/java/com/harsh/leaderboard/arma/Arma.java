@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "TB_ARMA")
-public class ArmaDto {
+public class Arma {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ARMA")
     @Column(name = "ID_ARMA")
     private Long idArma;
     @Column(name = "ID_PERSONAGEM")
@@ -29,8 +29,13 @@ public class ArmaDto {
     @Column(name = "CURA")
     private int cura;
 
-    public ArmaDto(Long idArma, Long idPersonagem, String tipoProjetil, int rangeProjetil, int velocidadeProjetil,
-                   String caminhoImagem, String nomeArma, int dano, int cura) {
+
+    @SuppressWarnings("unused")
+    public Arma() {
+    }
+
+    public Arma(Long idArma, Long idPersonagem, String tipoProjetil, int rangeProjetil, int velocidadeProjetil,
+                String caminhoImagem, String nomeArma, int dano, int cura) {
         this.idArma = idArma;
         this.idPersonagem = idPersonagem;
         this.tipoProjetil = tipoProjetil;

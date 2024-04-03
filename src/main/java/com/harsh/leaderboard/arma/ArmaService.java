@@ -13,20 +13,20 @@ public class ArmaService {
         this.armaRepository = armaRepository;
     }
 
-    public ArmaDto adicionarArma(ArmaDto arma) {
+    public Arma adicionarArma(Arma arma) {
         return armaRepository.save(arma);
     }
 
-    public List<ArmaDto> getArmas() {
+    public List<Arma> getArmas() {
         return armaRepository.findAll();
     }
 
-    public Optional<ArmaDto> getArmaPorId(Long id) {
+    public Optional<Arma> getArmaPorId(Long id) {
         return armaRepository.findById(id);
     }
 
-    public ArmaDto alterarArmaPorId(Long id, ArmaDto arma) {
-        ArmaDto existingArma = armaRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há armas com id: "+id));
+    public Arma alterarArmaPorId(Long id, Arma arma) {
+        Arma existingArma = armaRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há armas com id: "+id));
 
         existingArma.setIdArma(arma.getIdArma());
         existingArma.setIdPersonagem(arma.getIdPersonagem());
@@ -47,8 +47,19 @@ public class ArmaService {
         return "Arma de id: "+id+"removida com sucesso";
     }
 
-    public String removerArma(ArmaDto arma) {
+    public String removerArma(Arma arma) {
         armaRepository.delete(arma);
         return "Arma removida com sucesso";
     }
 }
+//org.springframework.beans.factory.UnsatisfiedDependencyException:
+//Error creating bean with name 'armaController' defined in file
+
+//Unsatisfied dependency expressed through constructor parameter 0:
+//Error creating bean with name 'armaService' defined in file
+
+//Unsatisfied dependency expressed through constructor parameter 0:
+//Error creating bean with name 'armaRepository' defined in
+
+//ArmaRepository defined in @EnableJpaRepositories declared on EnableJpaRepositoriesConfiguration:
+//Not a managed type: class com.harsh.leaderboard.arma.ArmaDto

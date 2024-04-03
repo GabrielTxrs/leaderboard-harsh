@@ -15,22 +15,22 @@ public class ArmaController {
     }
 
     @PostMapping("adicionar")
-    public ResponseEntity<ArmaDto> adicionarArma(@RequestBody ArmaDto arma) {
+    public ResponseEntity<Arma> adicionarArma(@RequestBody Arma arma) {
         return ResponseEntity.ok(armaService.adicionarArma(arma));
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<ArmaDto>> getArmas() {
+    public ResponseEntity<List<Arma>> getArmas() {
         return ResponseEntity.ok(armaService.getArmas());
     }
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Optional<ArmaDto>> getArmaPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Arma>> getArmaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(armaService.getArmaPorId(id));
     }
 
     @PutMapping("alterar/{id}")
-    public ResponseEntity<ArmaDto> alterarArmaPorId(@PathVariable Long id, @RequestBody ArmaDto arma) {
+    public ResponseEntity<Arma> alterarArmaPorId(@PathVariable Long id, @RequestBody Arma arma) {
         return ResponseEntity.ok(armaService.alterarArmaPorId(id, arma));
     }
 
@@ -40,7 +40,7 @@ public class ArmaController {
     }
 
     @DeleteMapping("remover")
-    public ResponseEntity<String> removerArma(@RequestBody ArmaDto arma) {
+    public ResponseEntity<String> removerArma(@RequestBody Arma arma) {
         return ResponseEntity.ok(armaService.removerArma(arma));
     }
 }

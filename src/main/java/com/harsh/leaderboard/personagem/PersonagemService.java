@@ -13,20 +13,20 @@ public class PersonagemService {
     public PersonagemService(PersonagemRepository personagemRepository) {
         this.personagemRepository = personagemRepository;
     }
-    public PersonagemDto adicionarPersonagem(PersonagemDto personagem) {
+    public Personagem adicionarPersonagem(Personagem personagem) {
         return personagemRepository.save(personagem);
     }
 
-    public List<PersonagemDto> getPersonagems() {
+    public List<Personagem> getPersonagems() {
         return personagemRepository.findAll();
     }
 
-    public Optional<PersonagemDto> getPersonagemPorId(@PathVariable Long id) {
+    public Optional<Personagem> getPersonagemPorId(@PathVariable Long id) {
         return personagemRepository.findById(id);
     }
 
-    public PersonagemDto alterarPersonagemPorId(Long id, PersonagemDto dadosPersonagem) {
-        PersonagemDto personagemAtualizado = personagemRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: "+id));
+    public Personagem alterarPersonagemPorId(Long id, Personagem dadosPersonagem) {
+        Personagem personagemAtualizado = personagemRepository.findById(id).orElseThrow(() -> new RuntimeException("Não há usuário com id: "+id));
 
         personagemAtualizado.setIdPersonagem(dadosPersonagem.getIdPersonagem());
         personagemAtualizado.setIdUsuario(dadosPersonagem.getIdUsuario());
@@ -45,7 +45,7 @@ public class PersonagemService {
         return "Personagem removido com sucesso";
     }
 
-    public String removerPersonagem(PersonagemDto personagem) {
+    public String removerPersonagem(Personagem personagem) {
         personagemRepository.delete(personagem);
         return "Personagem removido com sucesso";
     }

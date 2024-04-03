@@ -1,6 +1,8 @@
 package com.harsh.leaderboard.personagem;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PersonagemRepository extends JpaRepository<PersonagemDto, Long> {
+@Repository
+public interface PersonagemRepository extends JpaRepository<Personagem, Long> {
 }
